@@ -1,6 +1,5 @@
 <template>
   <div class="app">
-    <div>Sidebar!</div>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -15,5 +14,11 @@
 html {
   background: #000;
   color: white;
+}
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 </style>

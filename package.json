@@ -18,8 +18,12 @@
   },
   "dependencies": {
     "@netlify/functions": "^2.4.1",
+    "@nuxt/bridge": "^0.10.1",
     "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.2",
-    "pinia": "^2.1.7"
+    "bootstrap-vue": "^2.23.1",
+    "pinia": "^2.1.7",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2"
   }
 }
