@@ -1,10 +1,22 @@
 <template>
+  
   <div class="app">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+    <div v-if="interfaceStore.maintenanceMode" class="home">
+      <h1 >Politie.website</h1>
+      <img src="../public//construction.jpg"/>
+   </div>
+    <div v-else>
+      <NuxtLayout>
+        <NuxtPage />
+      </NuxtLayout>
+    </div>
   </div>
 </template>
+<script lang="ts" setup>
+  import { useInterfaceStore } from './stores/interfaceStore';
+
+  const interfaceStore = useInterfaceStore();
+</script>
 <style>
 * {
   padding: 0;
