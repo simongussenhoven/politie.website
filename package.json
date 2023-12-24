@@ -7,24 +7,26 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .ts,.js,.vue ."
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/tailwindcss": "^6.10.1",
-    "netlify-cli": "^17.10.1",
-    "nuxt": "^3.8.2",
-    "vue": "^3.3.12",
+    "@nuxtjs/eslint-config-typescript": "^12.1.0",
+    "@nuxtjs/style-resources": "^2.0.0",
+    "@types/lodash": "^4.14.202",
+    "eslint": "^8.54.0",
+    "nuxt": "^3.8.1",
+    "sass": "^1.69.5",
+    "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@netlify/functions": "^2.4.1",
-    "@nuxt/bridge": "^0.10.1",
+    "@nuxt/ui": "^2.10.0",
     "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.2",
-    "flowbite": "^2.2.1",
-    "pinia": "^2.1.7",
-    "sass": "^1.69.5",
-    "sass-loader": "^13.3.2"
+    "flowbite": "^2.2.0",
+    "lodash": "^4.17.21",
+    "pinia": "^2.1.7"
   }
 }

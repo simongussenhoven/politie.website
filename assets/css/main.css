@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background: black;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  overflow-x: hidden;
+}
+.app {
+  height: 100vh;
+  width: 100vw;
+  border: 1px soldi red;
+  display: flex;
+  flex-direction: column;
+}
+.pages {
+  flex-grow: 1;
+}
+h1,
+h2,
+h3 {
+  text-align: center;
+}
