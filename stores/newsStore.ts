@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { paramsToQueryParamString } from '@/utils/api-helpers'
 export const useNewsStore = defineStore('news', {
     state: () => ({
+        singleNewsItem: {} as NewsItem,
         newsItems: [] as NewsItem[],
         numberOfItems: 25 as number,
         searchTerm: '' as string,
@@ -39,6 +40,13 @@ export const useNewsStore = defineStore('news', {
             }
             const response = await this.getNews(params)
             this.newsItemsLocal = [...this.newsItemsLocal, ...response.nieuwsberichten]
+        },
+        async getNewsItemById(id: string) {
+            const params = {
+                id
+            }
+            const response = await this.getNews(params)
+            this.singleNewsItem = response.nieuwsberichten[0];
         },
         setSearchTerm(string: string) {
             this.searchTerm = string

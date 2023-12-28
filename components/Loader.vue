@@ -1,9 +1,16 @@
 <template>
-    <div class="loader" />
+    <div class="container">
+        <div class="loader" />
+    </div>
 </template>
 <script setup lang="ts">
 </script>
 <style scoped lang="scss">
+.container {
+    display: flex;
+    justify-content: center;
+}
+
 .loader {
     display: inline-block;
     width: 42px;

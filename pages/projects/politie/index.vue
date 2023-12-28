@@ -4,7 +4,7 @@
         <div class="container flex flex-col items-center">
             <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
                 <news-card v-for="item in highlightedNewsItems" :item="item" :key="item.uid"
-                    :relative-link="`/projects/politie/posts/${item.uid}`" />
+                    :relative-link="`/posts/${item.uid}`" />
             </div>
             <div class="news-cards-compact pt-5 container">
                 <news-card-compact v-for="item in otherNews" :item="item" />

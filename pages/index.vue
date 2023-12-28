@@ -1,48 +1,42 @@
 <template>
-    <div class="home flex flex-col justify-center items-center flex-grow gap-10">
-        <div class="flex flex-col gap-5">
-            <h1 class="text-7xl">Simon Gussenhoven</h1>
-            <h2 class="text-6xl">Frontend developer</h2>
-        </div>
-        <div class="cards flex flex-row flex-wrap justify-center max-w-5xl gap-5">
-            <Card v-for="(card, index) in cards" :cardContent="card" :key="index" />
+    <div class="page flex justify-center">
+        <div class="container flex flex-col items-center">
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+                <news-card v-for="item in highlightedNewsItems" :item="item" :key="item.uid"
+                    :relative-link="`/posts/${item.uid}`" />
+            </div>
+
+            <div class="news-cards-compact pt-5 container">
+                <news-card-compact v-for="item in otherNews" :item="item" />
+            </div>
+            <div class="last pb-10" v-if="newsStore.isLast">{{ getLastMessage() }}</div>
         </div>
     </div>
+    <intersection-observer @intersected="onIntersect" :isLoading="isLoading" />
 </template>
 <script lang="ts" setup>
-import Card from '@/components/Card.vue'
-import ts from '../assets/img/ts.png'
-import vue from '../assets/img/vue.png'
-import nuxt from '../assets/img/nuxt.png'
-import scrum from '../assets/img/scrum.png'
-import tw from '../assets/img/tailwind.png'
+import { ref } from 'vue';
+import { useNewsStore } from '@/stores/newsStore';
+import IntersectionObserver from '@/components/IntersectionObserver.vue';
+import NewsCard from '@/components/NewsCard.vue';
+import NewsCardCompact from '@/components/NewsCardCompact.vue'
 
-const cards = [
-    {
-        title: 'Typescript',
-        subTitle: 'Creating robust apps in Typescript',
-        image: ts
-    },
-    {
-        title: 'Vue.js',
-        subTitle: 'Specialized in Vue.js',
-        image: vue
-    },
-    {
-        title: 'Nuxt.js',
-        subTitle: 'Server side rendering with Nuxt',
-        image: nuxt
-    },
-    {
-        title: 'Scrum',
-        subTitle: 'Comfortable working Agile with Scrum',
-        image: scrum
-    },
-    {
-        title: 'Tailwind/Bootstrap',
-        subTitle: 'Css library enjoyer',
-        image: tw
-    },
+const newsStore = useNewsStore();
+const highlightedNewsItems = computed(() => newsStore.newsItems.slice(0, 8))
+const otherNews = computed(() => newsStore.newsItems.slice(8, newsStore.newsItems.length))
+const getLastMessage = () => {
+    if (newsStore.newsItems.length === 0 && newsStore.isLast) return "Geen items gevonden"
+    if (newsStore.isLast) return "Einde van de lijst"
+}
 
-] as CardContent[]
+const modalVisible = ref(true)
+
+const isLoading = ref(false)
+const onIntersect = () => {
+    isLoading.value = true
+    newsStore.getMoreNews().then(() => {
+        isLoading.value = false
+    });
+}
 </script>
+
