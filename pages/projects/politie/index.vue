@@ -18,9 +18,9 @@
 import { ref } from 'vue';
 import { useNewsStore } from '@/stores/newsStore';
 import IntersectionObserver from '@/components/IntersectionObserver.vue';
-import NewsCard from '@/components/politie/NewsCard.vue';
-import NewsCardCompact from '@/components/politie/NewsCardCompact.vue'
-import FilterBar from '@/components/politie/FilterBar.vue';
+import NewsCard from '@/components/NewsCard.vue';
+import NewsCardCompact from '@/components/NewsCardCompact.vue'
+import FilterBar from '@/components/FilterBar.vue';
 
 const newsStore = useNewsStore();
 const highlightedNewsItems = computed(() => newsStore.newsItems.slice(0, 8))
