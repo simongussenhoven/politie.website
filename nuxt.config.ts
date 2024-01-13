@@ -4,10 +4,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/style-resources',
     '@nuxt/ui',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
   ],
   css: [
     '@/assets/css/main.css',
   ],
-
 })
