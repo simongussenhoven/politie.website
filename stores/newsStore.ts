@@ -2,60 +2,19 @@ import { defineStore } from 'pinia'
 import { paramsToQueryParamString } from '@/utils/api-helpers'
 export const useNewsStore = defineStore('news', {
     state: () => ({
-        singleNewsItem: {} as NewsItem,
         newsItems: [] as NewsItem[],
-        numberOfItems: 25 as number,
-        searchTerm: '' as string,
         isLast: false as boolean,
-        newsItemsLocal: [] as NewsItem[],
-        isLastLocal: false as boolean,
+        filters: {
+            language: 'nl'
+        }
     }),
     actions: {
-        async getNews(params: any) {
-            const baseUrl = '/.netlify/functions/get-news'
-            const response = await fetch(baseUrl + paramsToQueryParamString(params))
-                .then(response => response.json()
-                )
-            return response
-        },
         async getMoreNews() {
-            if (this.isLast) return
-
-            const params = {
-                offset: this.newsItems.length,
-                query: this.searchTerm,
-                maxnumberofitems: this.numberOfItems
-            }
-            const response = await this.getNews(params)
-            if (!response.iterator || response.iterator.last) {
-                this.isLast = true
-                return
-            }
-            this.newsItems = [...this.newsItems, ...response.nieuwsberichten]
+            if (this.isLast) return;
+            const baseUrl = '/.netlify/functions/get-news';
+            const response = await fetch(baseUrl + paramsToQueryParamString(this.filters))
+                .then(response => response.json())
+            this.newsItems = response.nieuwsberichten;
         },
-        async getMoreLocalNews(location: string) {
-            if (this.isLastLocal) return
-            const params = {
-                query: location,
-            }
-            const response = await this.getNews(params)
-            this.newsItemsLocal = [...this.newsItemsLocal, ...response.nieuwsberichten]
-        },
-        async getNewsItemById(id: string) {
-            const params = {
-                id
-            }
-            const response = await this.getNews(params)
-            this.singleNewsItem = response.nieuwsberichten[0];
-        },
-        setSearchTerm(string: string) {
-            this.searchTerm = string
-        },
-        clearNewsItems() {
-            this.newsItems = [];
-        },
-        clearLocalNewsItems() {
-            this.newsItemsLocal = [];
-        }
     }
 })
