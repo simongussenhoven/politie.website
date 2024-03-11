@@ -5,6 +5,7 @@ export default defineNuxtConfig({
     '@nuxtjs/style-resources',
     '@nuxt/ui',
     '@pinia/nuxt',
+    '@nuxtjs/tailwindcss'
   ],
   css: [
     '@/assets/css/main.css',

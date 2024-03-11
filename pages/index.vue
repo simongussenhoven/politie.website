@@ -3,21 +3,18 @@
         <div v-for="newsItem in newsStore.newsItems">
             {{ newsItem.titel }}
         </div>
-        <Intersect :is-loading="isLoading" @intersected="getNews" />
+        <!-- <Intersect :is-loading="isLoading" @intersected="newsStore.getNews()" /> -->
     </section>
 </template>
 <script lang="ts" setup>
 import Intersect from '@/components/Intersect.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useNewsStore } from '@/stores/newsStore';
-import { onMounted } from 'vue';
 
+onMounted(() => {
+    newsStore.getNews()
+})
 const newsStore = useNewsStore()
 const isLoading = ref(true)
-const getNews = () => {
-    isLoading.value = true;
-    newsStore.getMoreNews().then(() => {
-        isLoading.value = false;
-    });
-}
+
 </script>
