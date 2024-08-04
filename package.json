@@ -19,6 +19,7 @@
     "eslint": "^8.54.0",
     "nuxt": "^3.8.1",
     "sass": "^1.69.5",
+    "shadcn-nuxt": "^0.10.4",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5"
   },
@@ -26,10 +27,14 @@
     "@nuxt/ui": "^2.10.0",
     "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.2",
-    "bootstrap-vue": "^2.23.1",
-    "flowbite": "^2.2.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "lodash": "^4.17.21",
-    "netlify-cli": "17.7.0",
-    "pinia": "^2.1.7"
+    "lucide-vue-next": "^0.424.0",
+    "netlify-cli": "^17.33.4",
+    "pinia": "^2.1.7",
+    "radix-vue": "^1.9.2",
+    "tailwind-merge": "^2.4.0",
+    "tailwindcss-animate": "^1.0.7"
   }
 }
