@@ -1,0 +1,3 @@
+<template>
+  Moble nav
+</template>

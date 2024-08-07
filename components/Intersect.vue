@@ -1,19 +1,15 @@
 <template>
   <div class="loader">
     <div ref="intersectionElement" />
-    <spinner v-if="isLoading" />
+    <PSpinner v-if="isLoading" />
   </div>
 </template>
 
 <script lang="ts">
 // TODO: convert to setup
-import Spinner from '@/components/Spinner.vue'
 export default {
   name: 'IntersectionObserverComponent',
   emits: ['intersected'],
-  components: {
-    Spinner
-  },
   props: {
     options: {
       type: Object,

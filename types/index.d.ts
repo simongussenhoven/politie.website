@@ -6,14 +6,14 @@ interface CardContent {
 }
 
 
-interface INewsRequest {
+interface NewsRequest {
   query: string,
   radius: number,
   maxNumberOfItems: number,
   offset: number
 }
 
-interface INewsItem {
+interface NewsItem {
   displayName: string
   links: string,
   alineas: {
@@ -44,12 +44,20 @@ interface INewsItem {
   tags: string[]
 }
 
-interface IIterator {
+interface SearchIterator {
   last: boolean,
   offset: number,
 }
 
-interface INewsResponse {
+interface NewsResponse {
   iterator: IIterator,
   nieuwsberichten: INewsItem[],
+}
+
+interface CardContent {
+  uid?: string,
+  title?: string,
+  description?: string,
+  content?: string,
+  footer?: string,
 }

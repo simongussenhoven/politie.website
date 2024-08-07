@@ -4,8 +4,8 @@ import { objectToQueryParams } from "@/utils/api-helpers"
 
 export const useNewsStore = defineStore('news', () => {
   const query = ref('Amsterdam')
-  const iterator = ref({} as IIterator)
-  const newsItems = ref([] as INewsItem[])
+  const iterator = ref({} as SearchIterator)
+  const newsItems = ref([] as NewsItem[])
   const radius = ref(5.0)
   const maxNumberOfItems = ref(10)
   const offset = ref(0)
@@ -21,7 +21,7 @@ export const useNewsStore = defineStore('news', () => {
     }
 
     try {
-      const response: INewsResponse = await $fetch(`api/getNews${objectToQueryParams(request)}`, {
+      const response: NewsResponse = await $fetch(`api/getNews${objectToQueryParams(request)}`, {
         method: 'GET',
       })
       iterator.value = response.iterator

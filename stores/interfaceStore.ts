@@ -1,12 +1,8 @@
 import { defineStore } from 'pinia'
 
-export const useInterfaceStore = defineStore('interface', {
-    state: () => ({
-        isGeneralModalVisible: false as Boolean
-    }),
-    actions: {
-        async toggleGeneralModalVisible() {
-            this.isGeneralModalVisible = !this.isGeneralModalVisible
-        }
-    }
+export const useInterfaceStore = defineStore('interface', () => {
+  const isMobile = ref(false)
+  const isDialogOpen = ref(false)
+  const dialogState = ref('disclaimer')
+  return { isMobile, isDialogOpen, dialogState }
 })
