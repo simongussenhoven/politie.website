@@ -1,5 +1,5 @@
 <template>
-  <div class="loader">
+  <div class="loader px-10 py-10">
     <div ref="intersectionElement" />
     <PSpinner v-if="isLoading" />
   </div>

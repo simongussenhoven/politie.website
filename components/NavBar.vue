@@ -7,7 +7,7 @@
           <NavigationMenuTrigger>{{ title }}</NavigationMenuTrigger>
           <NavigationMenuContent>
             <NuxtLink v-for="item in interfaceStore.navMenuItems" :key="item.title" :to="item.link"
-              class="block py-2 px-4" :class="{ 'text-green-400': $route.path === item.link }">{{ item.title }}
+              class="block py-2 px-4" :class="{ 'text-green-400': $route.path === item.link }">Link!
             </NuxtLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
