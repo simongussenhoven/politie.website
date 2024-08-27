@@ -1,16 +1,14 @@
 <template>
   <div class="news-cards flex flex-col gap-2">
     <GenericCard v-for="item in newsStore.newsItems" :item="item" :key="item.uid">
+      <!-- <template #prepend>
+        <NuxtImg :src="getImgUrl(item.afbeelding.url)" class="image" />
+      </template> -->
       <template #title>
         <h1>{{ item.titel }}</h1>
       </template>
       <template #content>
-        <!-- <p>{{ item.introductie }}</p>
-        <Transition>
-          <div v-if="readMore.includes(item.uid)" class="readmore">
-            <p v-for="alinea in item.alineas" class="pt-5" v-html="alinea.opgemaaktetekst" />
-          </div>
-        </Transition> -->
+        <PNewsCardSubtitle :date="item.publicatiedatum" :location="item.gebied" />
         <PAccordion>
           <template #title>
             {{ item.introductie }}
@@ -20,17 +18,18 @@
           </template>
         </PAccordion>
       </template>
-      <!-- <template #footer>
-        <Button @click="onClickReadMore(item.uid)" variant="secondary">
-          {{ `Lees ${readMore.includes(item.uid) ? 'minder' : 'meer'}` }}
-        </Button>
-      </template> -->
+
     </GenericCard>
 
   </div>
 </template>
 <script setup lang="ts">
+import { useNewsStore } from '@/stores/newsStore'
 const newsStore = useNewsStore()
+
+const getImgUrl = (url?: string) => {
+  return url ? url : '/default.png'
+}
 </script>
 
 <style scoped>
@@ -42,5 +41,9 @@ const newsStore = useNewsStore()
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+}
+
+.image {
+  min-width: 170px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <PTitleBar />
-    <NewsCards />
+    <PNewsCards />
     <PIntersect :is-loading="newsStore.isLoading" @intersected="newsStore.getNews()" />
   </div>
   <DialogDisclaimer />
