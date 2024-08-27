@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar border-b border-b-sky-400 py-2 px-5 md:px-0">
-    <NavigationMenu>
-      <NavigationMenuList>
+  <section class="navbar border-b border-b-sky-400 py-2 px-5 md:px-0">
+    <NavigationMenu class="flex min-w-full">
+      <NavigationMenuList class="inner-nav">
         <NavDesktopMenu v-if="!interfaceStore.isMobile" />
         <NavigationMenuItem v-else>
           <NavigationMenuTrigger>{{ title }}</NavigationMenuTrigger>
@@ -16,7 +16,7 @@
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
-  </nav>
+  </section>
 </template>
 <script setup lang="ts">
 import {
