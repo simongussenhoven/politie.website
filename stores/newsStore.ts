@@ -44,7 +44,7 @@ export const useNewsStore = defineStore('news', () => {
     newsItems.value = []
     iterator.value = {}
     getNews()
-  }, 3000)
+  }, 1500)
 
   watch(() => params.value.query, () => {
     debouncedGetNews.cancel();

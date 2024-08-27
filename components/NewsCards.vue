@@ -5,30 +5,32 @@
         <h1>{{ item.titel }}</h1>
       </template>
       <template #content>
-        <p>{{ item.introductie }}</p>
+        <!-- <p>{{ item.introductie }}</p>
         <Transition>
-          <div v-if="readMore.includes(item.uid)">
+          <div v-if="readMore.includes(item.uid)" class="readmore">
             <p v-for="alinea in item.alineas" class="pt-5" v-html="alinea.opgemaaktetekst" />
           </div>
-        </Transition>
+        </Transition> -->
+        <PAccordion>
+          <template #title>
+            {{ item.introductie }}
+          </template>
+          <template #content>
+            <PFixedPar v-for="alinea in item.alineas" class="pt-5" :text="alinea.opgemaaktetekst" />
+          </template>
+        </PAccordion>
       </template>
-      <template #footer>
+      <!-- <template #footer>
         <Button @click="onClickReadMore(item.uid)" variant="secondary">
           {{ `Lees ${readMore.includes(item.uid) ? 'minder' : 'meer'}` }}
         </Button>
-      </template>
+      </template> -->
     </GenericCard>
 
   </div>
 </template>
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
 const newsStore = useNewsStore()
-const readMore = ref([] as string[])
-
-const onClickReadMore = (id: string) => {
-  readMore.value.includes(id) ? readMore.value = readMore.value.filter((item) => item !== id) : readMore.value.push(id)
-}
 </script>
 
 <style scoped>
