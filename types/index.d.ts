@@ -45,8 +45,8 @@ interface NewsItem {
 }
 
 interface SearchIterator {
-  last: boolean,
-  offset: number,
+  last?: boolean,
+  offset?: number,
 }
 
 interface NewsResponse {

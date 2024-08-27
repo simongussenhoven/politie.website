@@ -19,7 +19,6 @@
     <template #footer>
       <Button variant="secondary" @click="onAgree">Akkoord</Button>
       <Button @click="onAgreeAndStoreForSession">Akkoord en niet meer tonen</Button>
-
     </template>
   </PDialog>
 </template>

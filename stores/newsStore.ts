@@ -1,5 +1,7 @@
 import { objectToQueryParams } from "@/utils/api-helpers"
 import { useFilterStore } from "@/stores/filterStore"
+import _ from "lodash"
+
 // https://api.politie.nl/v4/nieuws?language=nl&query=drie%20personen&radius=5.0&maxnumberofitems=10&offset=0
 
 export const useNewsStore = defineStore('news', () => {
@@ -23,13 +25,12 @@ export const useNewsStore = defineStore('news', () => {
 
   // methods
   const getNews = async () => {
+    if (iterator.value.last) return
     isLoading.value = true
     try {
-      console.log(params.value)
       const response: NewsResponse = await $fetch(`api/getNews${objectToQueryParams(params.value)}`, {
         method: 'GET',
       })
-      console.log('iterator', response.iterator)
       iterator.value = response.iterator
       newsItems.value = [...newsItems.value, ...response.nieuwsberichten]
     } catch (error) {
@@ -37,6 +38,18 @@ export const useNewsStore = defineStore('news', () => {
     }
     isLoading.value = false
   }
+
+  // when the query is changed, reset the newsItems and get the news after 2 seconds
+  const debouncedGetNews = _.debounce(() => {
+    newsItems.value = []
+    iterator.value = {}
+    getNews()
+  }, 3000)
+
+  watch(() => params.value.query, () => {
+    debouncedGetNews.cancel();
+    debouncedGetNews();
+  })
 
   return {
     query,
