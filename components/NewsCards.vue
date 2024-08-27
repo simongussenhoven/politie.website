@@ -1,5 +1,5 @@
 <template>
-  <div class="news-cards grid">
+  <div class="news-cards flex flex-col gap-2">
     <GenericCard v-for="item in items" :item="item" :key="item.uid">
       <template #title>
         <h1>{{ item.title }}</h1>
@@ -15,11 +15,3 @@ const props = defineProps<{
   items: CardContent[]
 }>()
 </script>
-<style scoped lang="scss">
-.news-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 1rem;
-
-}
-</style>

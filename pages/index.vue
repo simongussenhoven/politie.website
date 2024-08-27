@@ -2,21 +2,19 @@
   <div class="flex flex-col">
     <PTitleBar />
     <NewsCards :items="newsItemsShallow" />
+    <PIntersect />
   </div>
   <DialogDisclaimer />
   <!-- <Intersect :is-loading="isLoading" @intersected="newsStore.getNews()" /> -->
 
 </template>
 <script lang="ts" setup>
-import Intersect from '@/components/Intersect.vue'
 import { onMounted, ref } from 'vue'
 import { useNewsStore } from '@/stores/newsStore';
 
 onMounted(() => {
   newsStore.getNews()
-  if (!localStorage.getItem('disclaimerAccepted')) {
-    useInterfaceStore().isDialogOpen = true
-  }
+  if (!localStorage.getItem('disclaimerAccepted')) useInterfaceStore().isDialogOpen = true
 })
 
 const newsItemsShallow = computed(() => {
@@ -28,6 +26,7 @@ const newsItemsShallow = computed(() => {
     } as CardContent
   })
 })
+
 const newsStore = useNewsStore()
 const isLoading = ref(true)
 

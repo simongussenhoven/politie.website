@@ -1,29 +1,33 @@
 import { objectToQueryParams } from "@/utils/api-helpers"
-
+import { useFilterStore } from "@/stores/filterStore"
 // https://api.politie.nl/v4/nieuws?language=nl&query=drie%20personen&radius=5.0&maxnumberofitems=10&offset=0
 
 export const useNewsStore = defineStore('news', () => {
+
+  // state
   const query = ref('Amsterdam')
   const iterator = ref({} as SearchIterator)
   const newsItems = ref([] as NewsItem[])
-  const radius = ref(5.0)
-  const maxNumberOfItems = ref(10)
-  const offset = ref(0)
+  const offset = newsItems.value.length
 
-  const getNews = async () => {
-    if (iterator.value.last) return
-    // create request object
-    const request = {
-      query: query.value,
-      radius: radius.value,
-      maxNumberOfItems: maxNumberOfItems.value,
-      offset: newsItems.value.length
+  // filters
+  const filterStore = useFilterStore();
+  const params = computed(() => {
+    return {
+      query: filterStore.query,
+      radius: filterStore.radius,
+      maxNumberOfItems: filterStore.maxNumberOfItems,
     }
+  })
 
+  // methods
+  const getNews = async () => {
     try {
-      const response: NewsResponse = await $fetch(`api/getNews${objectToQueryParams(request)}`, {
+      console.log(params.value)
+      const response: NewsResponse = await $fetch(`api/getNews${objectToQueryParams(params.value)}`, {
         method: 'GET',
       })
+      console.log('iterator', response.iterator)
       iterator.value = response.iterator
       newsItems.value = response.nieuwsberichten
     } catch (error) {
@@ -34,6 +38,7 @@ export const useNewsStore = defineStore('news', () => {
   return {
     query,
     newsItems,
-    getNews
+    getNews,
+    iterator
   }
 })

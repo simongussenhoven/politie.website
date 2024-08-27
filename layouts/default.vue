@@ -3,7 +3,6 @@
     <NavBar />
     <div class="main p-5">
       <slot />
-      <PSidebar />
     </div>
 
   </div>

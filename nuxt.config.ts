@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     '@nuxtjs/style-resources',
     '@nuxt/ui',
@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt'
   ],
+  experimental: {
+    watcher: "chokidar"
+  },
   shadcn: {
     /**
      * Prefix for all the imported component

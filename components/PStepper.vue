@@ -16,7 +16,6 @@ import {
   NumberFieldIncrement,
   NumberFieldInput,
 } from '@/components/ui/number-field'
-import { Label } from '@/components/ui/Label'
 
 const emit = defineEmits(['update:modelValue'])
 

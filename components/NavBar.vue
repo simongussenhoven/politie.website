@@ -6,8 +6,9 @@
         <NavigationMenuItem v-else>
           <NavigationMenuTrigger>{{ title }}</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <NuxtLink v-for="item in menuItems" :key="item.title" :to="item.link" class="block py-2 px-4"
-              :class="{ 'text-sky-500': $route.path === item.link }">{{ item.title }}</NuxtLink>
+            <NuxtLink v-for="item in interfaceStore.navMenuItems" :key="item.title" :to="item.link"
+              class="block py-2 px-4" :class="{ 'text-green-400': $route.path === item.link }">{{ item.title }}
+            </NuxtLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
@@ -30,12 +31,6 @@ import { useInterfaceStore } from '@/stores/interfaceStore'
 
 const interfaceStore = useInterfaceStore()
 const router = useRouter()
-
-const menuItems = [
-  { title: 'Home', link: '/' },
-  { title: 'Vermiste personen', link: '/about' },
-  { title: 'Gezochte personen', link: '/contact' },
-]
 
 const title = computed(() => {
   return router.currentRoute.title || 'Menu'
