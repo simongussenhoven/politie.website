@@ -4,7 +4,7 @@
       <Icon icon="ic:baseline-location-on" />
       <span class="pb-1">{{ location }}</span>
     </div>
-    |
+    <span class="sm:hidden md:visible">|</span>
     <div class="date flex flex-row items-center gap-2">
       <Icon icon="ic:baseline-event" />
       <span class="pb-1">{{ formatDate(date) }}</span>

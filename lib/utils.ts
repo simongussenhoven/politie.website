@@ -1,5 +1,4 @@
 import { type ClassValue, clsx } from 'clsx'
-// @ts-expect-error: tailwind-merge is not a module
 import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
