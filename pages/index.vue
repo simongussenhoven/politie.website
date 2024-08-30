@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <PTitleBar />
+    <PTitleBar title="Nieuwsberichten" />
     <PNewsCards />
     <PIntersect :is-loading="useNewsStore().isLoading" @intersected=" useNewsStore().getNews()" />
   </div>
@@ -10,6 +10,4 @@
 </template>
 <script lang="ts" setup>
 import { useNewsStore } from '@/stores/newsStore';
-
-onMounted(() => useInterfaceStore().isDialogOpen = !localStorage.getItem('disclaimerAccepted'))
 </script>

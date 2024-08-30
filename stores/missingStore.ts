@@ -1,12 +1,13 @@
 import { objectToQueryParams } from "@/utils/api-helpers"
 import { useFilterStore } from "@/stores/filterStore"
 import _ from "lodash"
+import type { MissingPerson, MissingPersonsResponse } from "@/types"
 
-export const useNewsStore = defineStore('news', () => {
+export const useMissingStore = defineStore('missing', () => {
 
   // state
   const iterator = ref({} as SearchIterator)
-  const newsItems = ref([] as NewsItem[])
+  const missingPersons = ref([] as MissingPerson[])
   const isLoading = ref(false)
 
   // filters
@@ -16,20 +17,20 @@ export const useNewsStore = defineStore('news', () => {
       query: filterStore.query,
       radius: filterStore.radius,
       maxNumberOfItems: filterStore.maxNumberOfItems,
-      offset: newsItems.value.length
+      offset: missingPersons.value.length
     }
   })
 
   // methods
-  const getNews = async () => {
+  const getMissing = async () => {
     if (iterator.value.last) return
     isLoading.value = true
     try {
-      const response: NewsResponse = await $fetch(`api/getNews${objectToQueryParams(params.value)}`, {
+      const response: MissingPersonsResponse = await $fetch(`api/getMissing${objectToQueryParams(params.value)}`, {
         method: 'GET',
       })
       iterator.value = response.iterator
-      newsItems.value = [...newsItems.value, ...response.nieuwsberichten]
+      missingPersons.value = [...missingPersons.value, ...response.vermisten]
     } catch (error: any) {
       useInterfaceStore().onError(error)
     }
@@ -38,9 +39,9 @@ export const useNewsStore = defineStore('news', () => {
 
   // when the query is changed, reset the newsItems and get the news after 2 seconds
   const debouncedGetNews = _.debounce(() => {
-    newsItems.value = []
+    missingPersons.value = []
     iterator.value = {}
-    getNews()
+    getMissing()
   }, 1500)
 
   watch(() => params.value.query, () => {
@@ -49,8 +50,8 @@ export const useNewsStore = defineStore('news', () => {
   })
 
   return {
-    newsItems,
-    getNews,
+    missingPersons,
+    getMissing,
     iterator,
     isLoading
   }

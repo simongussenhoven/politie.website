@@ -5,6 +5,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
-  }
+    },
+    "types": [
+      "./types"
+    ]
+  },
+  // "include": [
+  //   "types/**/*.d.ts",
+  // ]
 }

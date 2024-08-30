@@ -16,6 +16,6 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     interfaceStore.isMobile = window.innerWidth < 768
   })
+  useInterfaceStore().isDialogOpen = !localStorage.getItem('disclaimerAccepted')
 })
-
 </script>

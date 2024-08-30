@@ -24,19 +24,3 @@ import { useNewsStore } from '@/stores/newsStore'
 const newsStore = useNewsStore()
 
 </script>
-
-<style scoped>
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
-
-.image {
-  min-width: 170px;
-}
-</style>
