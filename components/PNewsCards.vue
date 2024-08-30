@@ -11,12 +11,10 @@
             {{ item.introductie }}
           </template>
           <template #content>
-            <NuxtImage :src="getImgUrl(item.afbeelding.url)" class="image" />
             <PFixedPar v-for="alinea in item.alineas" class="pt-5" :text="alinea.opgemaaktetekst" />
           </template>
         </PAccordion>
       </template>
-
     </GenericCard>
 
   </div>
@@ -25,9 +23,6 @@
 import { useNewsStore } from '@/stores/newsStore'
 const newsStore = useNewsStore()
 
-const getImgUrl = (url?: string) => {
-  return url ? url : '/default.png'
-}
 </script>
 
 <style scoped>
