@@ -33,8 +33,8 @@ export const useNewsStore = defineStore('news', () => {
       })
       iterator.value = response.iterator
       newsItems.value = [...newsItems.value, ...response.nieuwsberichten]
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      useInterfaceStore().onError(error)
     }
     isLoading.value = false
   }
