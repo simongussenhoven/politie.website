@@ -5,7 +5,7 @@
         <h1>{{ item.titel }}</h1>
       </template>
       <template #content>
-        <PNewsCardSubtitle :date="item.publicatiedatum" :location="item.gebied" />
+        <PCardSubtitle :date="item.publicatiedatum" :location="item.gebied" />
         <PAccordion>
           <template #title>
             {{ item.introductie }}

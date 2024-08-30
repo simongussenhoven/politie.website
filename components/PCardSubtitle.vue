@@ -1,11 +1,11 @@
 <template>
   <div class="news-card-subtitle flex gap-3">
-    <div class="location flex flex-row items-center gap-2">
+    <div class="location flex flex-row items-center gap-2" v-if="props.location">
       <Icon icon="ic:baseline-location-on" />
       <span class="pb-1">{{ location }}</span>
     </div>
-    <span class="sm:hidden md:visible">|</span>
-    <div class="date flex flex-row items-center gap-2">
+    <span class="sm:hidden md:visible" v-if="props.date">|</span>
+    <div class="date flex flex-row items-center gap-2" v-if="props.date">
       <Icon icon="ic:baseline-event" />
       <span class="pb-1">{{ formatDate(date) }}</span>
     </div>

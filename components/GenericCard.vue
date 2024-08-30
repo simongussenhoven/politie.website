@@ -1,10 +1,10 @@
 <template>
   <Card>
-    <div class="card-container flex">
+    <div class="card-container flex border">
       <div class="card-prepend" v-if=$slots.prepend>
         <slot name="prepend" />
       </div>
-      <div class="card-content">
+      <div class="card-content min-w-full">
         <CardHeader v-if="$slots.title || $slots.description">
           <CardTitle v-if="$slots.title">
             <slot name="title" />

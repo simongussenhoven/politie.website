@@ -1,15 +1,13 @@
 <template>
   <div class="flex flex-col">
     <PTitleBar title="Vermiste personen" />
-    <PMissingPersonsCard />
-    <!-- <PIntersect :is-loading="useNewsStore().isLoading" @intersected=" useNewsStore().getNews()" /> -->
+    <PMissingPersonsCards />
+    <PIntersect :is-loading="missingStore.isLoading" @intersected=" missingStore.getMissing()"
+      :is-last="missingStore.iterator.last" />
   </div>
   <GenericDialog />
-
-
 </template>
 <script lang="ts" setup>
 import { useMissingStore } from '@/stores/missingStore'
-
-onMounted(() => useMissingStore().getMissing())
+const missingStore = useMissingStore()
 </script>

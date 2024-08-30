@@ -1,11 +1,6 @@
 export interface MissingPersonsResponse {
-  iterator: Iterator
+  iterator: SearchIterator
   vermisten: MissingPerson[]
-}
-
-export interface Iterator {
-  last: boolean
-  offset: number
 }
 
 export interface MissingPerson {
@@ -20,7 +15,7 @@ export interface MissingPerson {
   zaaknummer: string
   vermistsinds: string
   laatstgezienin: string
-  afbeeldingen: Afbeeldingen[]
+  afbeeldingen: Image[]
   signalementen: Signalementen[]
   introductie: string
   omschrijving: string
@@ -37,20 +32,10 @@ export interface Availabletranslation {
   id: string
 }
 
-export interface Afbeeldingen {
-  url: string
-  alttext: string
-}
-
 export interface Signalementen {
-  afbeelding: Afbeelding
+  afbeelding: Image
   titel: string
   persoonskenmerken: Persoonskenmerken[]
-}
-
-export interface Afbeelding {
-  url: string
-  alttext: string
 }
 
 export interface Persoonskenmerken {

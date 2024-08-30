@@ -1,19 +1,11 @@
-interface CardContent {
-  title: string,
-  subTitle: string,
-  buttonText: string,
-  image,
-}
-
-
-interface NewsRequest {
+export interface NewsRequest {
   query: string,
   radius: number,
   maxNumberOfItems: number,
   offset: number
 }
 
-interface NewsItem {
+export interface NewsItem {
   displayName: string
   links: string,
   alineas: {
@@ -44,14 +36,9 @@ interface NewsItem {
   tags: string[]
 }
 
-interface SearchIterator {
-  last?: boolean,
-  offset?: number,
-}
-
-interface NewsResponse {
-  iterator: IIterator,
-  nieuwsberichten: INewsItem[],
+export interface NewsResponse {
+  iterator: SearchIterator,
+  nieuwsberichten: NewsItem[],
 }
 
 interface CardContent {

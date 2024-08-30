@@ -1,13 +1,13 @@
 import { objectToQueryParams } from "@/utils/api-helpers"
 import { useFilterStore } from "@/stores/filterStore"
 import _ from "lodash"
-import type { MissingPerson, MissingPersonsResponse } from "@/types"
+import type { WantedPerson, WantedPersonsResponse } from "@/types/wanted"
 
-export const useMissingStore = defineStore('missing', () => {
+export const useWantedStore = defineStore('wanted', () => {
 
   // state
   const iterator = ref({} as SearchIterator)
-  const missingPersons = ref([] as MissingPerson[])
+  const wantedPersons = ref([] as WantedPerson[])
   const isLoading = ref(true)
 
   // filters
@@ -17,16 +17,16 @@ export const useMissingStore = defineStore('missing', () => {
       query: filterStore.query,
       radius: filterStore.radius,
       maxNumberOfItems: filterStore.maxNumberOfItems,
-      offset: missingPersons.value.length
+      offset: wantedPersons.value.length
     }
   })
 
   // methods
-  const getMissing = async () => {
+  const getWanted = async () => {
     if (iterator.value.last) return
     isLoading.value = true
     try {
-      const response: MissingPersonsResponse = await $fetch(`api/getMissing${objectToQueryParams(params.value)}`, {
+      const response: WantedPersonsResponse = await $fetch(`api/getWanted${objectToQueryParams(params.value)}`, {
         method: 'GET',
       })
       if (!response) {
@@ -35,7 +35,7 @@ export const useMissingStore = defineStore('missing', () => {
         return
       }
       iterator.value = response.iterator
-      missingPersons.value = [...missingPersons.value, ...response.vermisten]
+      wantedPersons.value = [...wantedPersons.value, ...response.opsporingsberichten]
     } catch (error: any) {
       useInterfaceStore().onError(error)
     }
@@ -43,20 +43,20 @@ export const useMissingStore = defineStore('missing', () => {
   }
 
   // when the query is changed, reset the newsItems and get the news after 2 seconds
-  const debounceGetMissing = _.debounce(() => {
-    missingPersons.value = []
+  const debounceGetWanted = _.debounce(() => {
+    wantedPersons.value = []
     iterator.value = {}
-    getMissing()
+    getWanted()
   }, 1500)
 
   watch(() => params.value.query, () => {
-    debounceGetMissing.cancel();
-    debounceGetMissing();
+    debounceGetWanted.cancel();
+    debounceGetWanted();
   })
 
   return {
-    missingPersons,
-    getMissing,
+    wantedPersons,
+    getWanted,
     iterator,
     isLoading
   }

@@ -5,10 +5,10 @@
         <h1>{{ item.titel }}</h1>
       </template>
       <template #content>
-        <PNewsCardSubtitle :date="item.publicatiedatum" :location="item.laatstgezienin" />
+        <PCardSubtitle :date="item.publicatiedatum" :location="item.laatstgezienin" />
         <PAccordion>
           <template #title>
-            <div class="content flex gap-5 pr-5">
+            <div v-if="item.afbeeldingen.length" class="content flex gap-5 pr-5">
               <img class="max-w-32" :src="item.afbeeldingen[0].url" alt="missing person" />
             </div>
             {{ item.introductie }}
@@ -21,6 +21,3 @@
     </GenericCard>
   </section>
 </template>
-<script lang="ts" setup>
-
-</script>

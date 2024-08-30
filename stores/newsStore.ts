@@ -1,13 +1,14 @@
 import { objectToQueryParams } from "@/utils/api-helpers"
 import { useFilterStore } from "@/stores/filterStore"
 import _ from "lodash"
+import type { NewsItem, NewsResponse } from "@/types"
 
 export const useNewsStore = defineStore('news', () => {
 
   // state
   const iterator = ref({} as SearchIterator)
   const newsItems = ref([] as NewsItem[])
-  const isLoading = ref(false)
+  const isLoading = ref(true)
 
   // filters
   const filterStore = useFilterStore();
@@ -28,6 +29,11 @@ export const useNewsStore = defineStore('news', () => {
       const response: NewsResponse = await $fetch(`api/getNews${objectToQueryParams(params.value)}`, {
         method: 'GET',
       })
+      if (!response) {
+        iterator.value.last = true
+        isLoading.value = false
+        return
+      }
       iterator.value = response.iterator
       newsItems.value = [...newsItems.value, ...response.nieuwsberichten]
     } catch (error: any) {
